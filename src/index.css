@@ -10,8 +10,8 @@ body {
 }
 
 .icon {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
 }
 
 .app {
@@ -43,8 +43,8 @@ body {
 }
 
 .choice img {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -82,7 +82,6 @@ body {
   background-color: #0056b3;
 }
 
-/* Анимация появления */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -94,7 +93,6 @@ body {
   }
 }
 
-/* Анимация победы */
 @keyframes victoryDance {
   0% {
     transform: rotate(0deg) scale(1);
@@ -117,7 +115,6 @@ body {
   animation: victoryDance 1s ease-in-out infinite;
 }
 
-/* Анимация проигрыша */
 @keyframes loseShake {
   0% {
     transform: translateX(0);

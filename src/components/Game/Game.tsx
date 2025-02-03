@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Confetti from "react-confetti";
 import "../../index.css";
 import Rock from "../../assets/rock.png";
 import Paper from "../../assets/paper.png";
@@ -6,7 +7,6 @@ import Scissors from "../../assets/scissors.png";
 
 type Choice = "rock" | "paper" | "scissors";
 
-// Создаем объект для хранения связей между выбором и его изображением
 const choiceImages: Record<Choice, string> = {
   rock: Rock,
   paper: Paper,
@@ -33,12 +33,18 @@ function Game(): JSX.Element {
   const [userChoice, setUserChoice] = useState<Choice | null>(null);
   const [computerChoice, setComputerChoice] = useState<Choice | null>(null);
   const [result, setResult] = useState<string>("");
+  const [showConfetti, setShowConfetti] = useState<boolean>(false);
 
   const handleChoice = (choice: Choice): void => {
     setUserChoice(choice);
     const compChoice = choices[Math.floor(Math.random() * choices.length)];
     setComputerChoice(compChoice);
     const winner = determineWinner(choice, compChoice);
+
+    if (winner === "You won!") {
+      setShowConfetti(true);
+    }
+
     setResult(winner);
   };
 
@@ -46,11 +52,21 @@ function Game(): JSX.Element {
     setUserChoice(null);
     setComputerChoice(null);
     setResult("");
+    setShowConfetti(false); // Скрываем конфетти при сбросе игры
   };
 
   return (
     <div className="game-container">
+      {showConfetti && (
+        <Confetti width={window.innerWidth} height={window.innerHeight} />
+      )}
       {!result && <h2>Your choice!</h2>}
+      <h2>{result}</h2>
+      {result && (
+        <button onClick={resetGame} className="reset-button">
+          Play again
+        </button>
+      )}
       <div className="choices">
         {!result &&
           choices.map((choice) => (
@@ -59,7 +75,6 @@ function Game(): JSX.Element {
               onClick={() => handleChoice(choice)}
               className={`choice ${choice}`}
             >
-              {/* Используем импортированные изображения */}
               <img src={choiceImages[choice]} alt={choice} />
             </button>
           ))}
@@ -82,10 +97,6 @@ function Game(): JSX.Element {
               className={result.includes("lost") ? "victory" : "defeat"}
             />
           </div>
-          <h2>{result}</h2>
-          <button onClick={resetGame} className="reset-button">
-            Play again
-          </button>
         </div>
       )}
     </div>
