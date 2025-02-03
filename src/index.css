@@ -9,6 +9,11 @@ body {
   height: 100vh;
 }
 
+.icon {
+  width: 100px;
+  height: 100px;
+}
+
 .app {
   text-align: center;
 }
@@ -58,8 +63,8 @@ body {
 }
 
 .results img {
-  width: 150px;
-  height: 150px;
+  width: 70px;
+  height: 70px;
 }
 
 .reset-button {

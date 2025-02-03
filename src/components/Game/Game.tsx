@@ -50,17 +50,19 @@ function Game(): JSX.Element {
 
   return (
     <div className="game-container">
+      {!result && <h2>Your choice!</h2>}
       <div className="choices">
-        {choices.map((choice) => (
-          <button
-            key={choice}
-            onClick={() => handleChoice(choice)}
-            className={`choice ${choice}`}
-          >
-            {/* Используем импортированные изображения */}
-            <img src={choiceImages[choice]} alt={choice} />
-          </button>
-        ))}
+        {!result &&
+          choices.map((choice) => (
+            <button
+              key={choice}
+              onClick={() => handleChoice(choice)}
+              className={`choice ${choice}`}
+            >
+              {/* Используем импортированные изображения */}
+              <img src={choiceImages[choice]} alt={choice} />
+            </button>
+          ))}
       </div>
       {userChoice && computerChoice && (
         <div className="results">
